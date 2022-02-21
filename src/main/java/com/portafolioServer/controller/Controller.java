@@ -62,7 +62,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Antonio
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
 public class Controller {
 
     @Autowired
@@ -104,7 +104,7 @@ public class Controller {
     }
 
     @GetMapping("/traerUser/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public Usuario unUser(@PathVariable Long id) {
         Usuario per = interUsuario.findUsuario(id);
         //try{
@@ -119,23 +119,23 @@ public class Controller {
     }
 
     @PostMapping("/nuevoUsuario")
-    public String crearPersona(@RequestBody Usuario user, @RequestParam("file") MultipartFile imagen) {
+    public String crearPersona(@RequestBody Usuario user) {
 
         // Base64.Encoder enc = Base64.getEncoder();
         // String s = enc.encodeToString( user.getPassword().getBytes());
         // user.setPassword(s); 
-        if (!imagen.isEmpty()) {
-            Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
-            String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-            try {
-                byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + imagen.getOriginalFilename());
-                Files.write(rutaCompleta, bytesImagen);
-                user.setFotobaner(imagen.getOriginalFilename());
-            } catch (IOException exc) {
-                System.out.println("Error Guardando la imagen: " + exc.getMessage());
-            }
-        }
+       // if (!imagen.isEmpty()) {
+         //   Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+           // String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+           // try {
+             //   byte[] bytesImagen = imagen.getBytes();
+               // Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + imagen.getOriginalFilename());
+               // Files.write(rutaCompleta, bytesImagen);
+              //  user.setFotobaner(imagen.getOriginalFilename());
+           // } catch (IOException exc) {
+             //   System.out.println("Error Guardando la imagen: " + exc.getMessage());
+            //}
+        //}
         interUsuario.savedUsuario(user);
         return "El usuario fue creado";
     }
