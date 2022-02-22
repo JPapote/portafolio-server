@@ -187,7 +187,7 @@ public class Controller {
 
     @PutMapping(value="/editarEducacion/{id}", consumes = MULTIPART_FORM_DATA_VALUE)
     public Educacion EditEducacion(@PathVariable Long id,
-            @RequestParam("educacion")String data, @RequestParam("file") MultipartFile imagen, @RequestParam("nombreNewImagen") String nombreImagen) {
+            @RequestParam("educacion")String data, @RequestParam(value="file", required=false) MultipartFile imagen, @RequestParam("nombreNewImagen") String nombreImagen) {
         
         Gson g = new Gson();
 
@@ -242,7 +242,7 @@ public class Controller {
 
     @PutMapping(value="/editarExperiencia/{id}", consumes = MULTIPART_FORM_DATA_VALUE)
     public Experiencia EditExperiencia(@PathVariable Long id,
-            @RequestParam("experiencia") String data, @RequestParam("file") MultipartFile imagen, @RequestParam("nombreNewImagen") String nombreImagen) {
+            @RequestParam("experiencia") String data, @RequestParam(value="file", required=false) MultipartFile imagen, @RequestParam(value="nombreNewImagen", required=false) String nombreImagen) {
       
         
         Gson g = new Gson();
@@ -357,7 +357,7 @@ public class Controller {
 
     @PutMapping(value = "/editarSobreMi/{id}", consumes = MULTIPART_FORM_DATA_VALUE)
     public SobreMi editarSobreMi(@PathVariable Long id,
-               @RequestParam("file") MultipartFile image, @RequestParam("sobreMi") String data, @RequestParam("nombreNewImagen") String nombreImagen) throws IOException   {
+               @RequestParam(value="file", required=false) MultipartFile image, @RequestParam("sobreMi") String data, @RequestParam(value="nombreNewImagen", required=false) String nombreImagen) throws IOException   {
                 
 
          Gson g = new Gson();
