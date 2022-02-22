@@ -168,7 +168,7 @@ public class Controller {
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(p.getFotobaner());
@@ -209,7 +209,7 @@ public class Controller {
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(ed.getFoto());
@@ -270,7 +270,7 @@ public class Controller {
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(exp.getFoto());
@@ -389,7 +389,7 @@ public class Controller {
         
         
                byte[] bytesImagen = image.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(sm.getFotoperfil());
