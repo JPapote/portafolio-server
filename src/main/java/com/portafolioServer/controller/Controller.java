@@ -54,6 +54,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -89,8 +90,10 @@ public class Controller {
         return interUsuario.getUsuario();
     }
 
-    @GetMapping("fileImagenes/{filename}")
-    public ResponseEntity<Resource> fileImagenes(@PathVariable("filename") String filename) throws IOException {
+    @GetMapping("fileImagenes")
+    @ResponseBody
+    @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
+    public ResponseEntity<Resource> fileImagenes(@RequestParam String filename) throws IOException {
         Path filePath = Paths.get("src\\main\\resources\\static\\imagenes").toAbsolutePath().normalize().resolve(filename);
         if (!Files.exists(filePath)) {
             throw new FileNotFoundException(filename + " was not found on the server");
