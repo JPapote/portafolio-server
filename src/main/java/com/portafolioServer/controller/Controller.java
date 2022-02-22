@@ -164,7 +164,7 @@ public class Controller {
 
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
@@ -205,7 +205,7 @@ public class Controller {
 
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
@@ -266,7 +266,7 @@ public class Controller {
         }
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
@@ -381,7 +381,7 @@ public class Controller {
         
          if (!image.isEmpty()) {
 
-             Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+             Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             
             try {
