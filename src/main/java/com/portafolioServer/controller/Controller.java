@@ -90,7 +90,7 @@ public class Controller {
         return interUsuario.getUsuario();
     }
 
-    @GetMapping("fileImagenes")
+    @GetMapping("/fileImagenes")
     @ResponseBody
     @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public ResponseEntity<Resource> fileImagenes(@RequestParam String filename) throws IOException {
