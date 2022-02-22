@@ -93,6 +93,7 @@ public class Controller {
     @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public ResponseEntity<Resource> fileImagenes(@PathVariable("filename") String filename) throws IOException {
         Path filePath = Paths.get("src\\main\\resources\\static\\imagenes").toAbsolutePath().normalize().resolve(filename);
+        System.out.println(filePath);
         if (!Files.exists(filePath)) {
             throw new FileNotFoundException(filename + " was not found on the server");
         }
