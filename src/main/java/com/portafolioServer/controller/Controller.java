@@ -93,7 +93,7 @@ public class Controller {
     @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public Path fileImagenes(@PathVariable("filename") String filename) throws IOException {
         //Path filePath = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes").toAbsolutePath().normalize().resolve(filename);
-       Path filePath = Paths.get("src/main/java/com/portafolioServer/imagenes").toAbsolutePath().normalize();
+       Path filePath = Paths.get("src/main/java/com/portafolioServer/imagenes").toAbsolutePath().normalize().resolve(filename);
         return filePath;
         //System.out.println(filePath);
         //if (!Files.exists(filePath)) {
