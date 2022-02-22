@@ -91,7 +91,7 @@ public class Controller {
 
     @GetMapping("fileImagenes/{filename}")
     @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
-    public ResponseEntity<Resource> fileImagenes(@PathVariable("filename") String filename) throws IOException {
+    public Path fileImagenes(@PathVariable("filename") String filename) throws IOException {
         Path filePath = Paths.get("src\\main\\resources\\static\\imagenes").toAbsolutePath().normalize().resolve(filename);
         System.out.println(filePath);
         if (!Files.exists(filePath)) {
@@ -101,8 +101,9 @@ public class Controller {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("File-Name", filename);
         httpHeaders.add(CONTENT_DISPOSITION, "attachment;File-Name=" + resource.getFilename());
-        return ResponseEntity.ok().contentType(MediaType.parseMediaType(Files.probeContentType(filePath)))
-                .headers(httpHeaders).body(resource);
+       // return ResponseEntity.ok().contentType(MediaType.parseMediaType(Files.probeContentType(filePath)))
+         //       .headers(httpHeaders).body(resource);
+         return filePath;
     }
 
     @GetMapping("/traerUser/{id}")
