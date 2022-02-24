@@ -91,9 +91,11 @@ public class Controller {
 
     @GetMapping("fileImagenes/{filename}")
     @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
-    public Path fileImagenes(@PathVariable("filename") String filename) throws IOException {
-        Path filePath = Paths.get("src\\main\\resources\\static\\imagenes").toAbsolutePath().normalize().resolve(filename);
-        System.out.println(filePath);
+    public ResponseEntity<Resource> fileImagenes(@PathVariable("filename") String filename) throws IOException {
+        //Path filePath = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes").toAbsolutePath().normalize().resolve(filename);
+       Path filePath = Paths.get("src/main/java/com/portafolioServer/imagenes").toAbsolutePath().normalize().resolve(filename);
+        
+        //System.out.println(filePath);
         if (!Files.exists(filePath)) {
             throw new FileNotFoundException(filename + " was not found on the server");
         }
@@ -101,9 +103,8 @@ public class Controller {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("File-Name", filename);
         httpHeaders.add(CONTENT_DISPOSITION, "attachment;File-Name=" + resource.getFilename());
-       // return ResponseEntity.ok().contentType(MediaType.parseMediaType(Files.probeContentType(filePath)))
-         //       .headers(httpHeaders).body(resource);
-         return filePath;
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(Files.probeContentType(filePath)))
+                .headers(httpHeaders).body(resource);
     }
 
     @GetMapping("/traerUser/{id}")
@@ -163,11 +164,11 @@ public class Controller {
 
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(p.getFotobaner());
@@ -186,7 +187,7 @@ public class Controller {
 
     @PutMapping(value="/editarEducacion/{id}", consumes = MULTIPART_FORM_DATA_VALUE)
     public Educacion EditEducacion(@PathVariable Long id,
-            @RequestParam("educacion")String data, @RequestParam("file") MultipartFile imagen, @RequestParam("nombreNewImagen") String nombreImagen) {
+            @RequestParam("educacion")String data, @RequestParam(value="file", required=false) MultipartFile imagen, @RequestParam("nombreNewImagen") String nombreImagen) {
         
         Gson g = new Gson();
 
@@ -204,11 +205,11 @@ public class Controller {
 
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(ed.getFoto());
@@ -241,7 +242,7 @@ public class Controller {
 
     @PutMapping(value="/editarExperiencia/{id}", consumes = MULTIPART_FORM_DATA_VALUE)
     public Experiencia EditExperiencia(@PathVariable Long id,
-            @RequestParam("experiencia") String data, @RequestParam("file") MultipartFile imagen, @RequestParam("nombreNewImagen") String nombreImagen) {
+            @RequestParam("experiencia") String data, @RequestParam(value="file", required=false) MultipartFile imagen, @RequestParam(value="nombreNewImagen", required=false) String nombreImagen) {
       
         
         Gson g = new Gson();
@@ -265,11 +266,11 @@ public class Controller {
         }
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(exp.getFoto());
@@ -356,7 +357,7 @@ public class Controller {
 
     @PutMapping(value = "/editarSobreMi/{id}", consumes = MULTIPART_FORM_DATA_VALUE)
     public SobreMi editarSobreMi(@PathVariable Long id,
-               @RequestParam("file") MultipartFile image, @RequestParam("sobreMi") String data, @RequestParam("nombreNewImagen") String nombreImagen) throws IOException   {
+               @RequestParam(value="file", required=false) MultipartFile image, @RequestParam("sobreMi") String data, @RequestParam(value="nombreNewImagen", required=false) String nombreImagen) throws IOException   {
                 
 
          Gson g = new Gson();
@@ -380,7 +381,7 @@ public class Controller {
         
          if (!image.isEmpty()) {
 
-             Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
+             Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             
             try {
@@ -388,7 +389,7 @@ public class Controller {
         
         
                byte[] bytesImagen = image.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(sm.getFotoperfil());
