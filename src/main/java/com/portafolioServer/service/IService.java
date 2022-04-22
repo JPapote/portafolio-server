@@ -20,7 +20,7 @@ public interface IService {
     
     public void updateUsuario( Usuario user);
     
-    public Usuario findByPassword(String password);
+    public Usuario findByNombre(String nombre);
     
     public Usuario findUsuario(Long id);
     

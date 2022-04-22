@@ -51,8 +51,8 @@ public class ServiceUsuario implements IService {
     }
 
     @Override
-    public Usuario findByPassword(String password) {
-        return repo.findByPassword(password);
+    public Usuario findByNombre(String nombre) {
+        return repo.findByNombre(nombre);
     }
     
     

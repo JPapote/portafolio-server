@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 import com.portafolioServer.model.Educacion;
 import com.portafolioServer.model.Experiencia;
 import com.portafolioServer.model.HabilidadesDurasBlandas;
-import com.portafolioServer.model.ImagenBase64;
+
 import com.portafolioServer.model.Proyecto;
 import com.portafolioServer.model.SobreMi;
 import com.portafolioServer.model.Usuario;
@@ -62,7 +62,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Antonio
  */
 @RestController
-@CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
+@CrossOrigin(origins = "http://localhost:3306")
 public class Controller {
 
     @Autowired
@@ -108,6 +108,7 @@ public class Controller {
     }
 
     @GetMapping("/traerUser/{id}")
+    //@CrossOrigin(origins = "http://localhost:4200")
     @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public Usuario unUser(@PathVariable Long id) {
         Usuario per = interUsuario.findUsuario(id);
@@ -122,39 +123,7 @@ public class Controller {
         return per;
     }
 
-    @PostMapping("/nuevoUsuario")
-    public String crearPersona(@RequestBody Usuario user) {
-
-        // Base64.Encoder enc = Base64.getEncoder();
-        // String s = enc.encodeToString( user.getPassword().getBytes());
-        // user.setPassword(s); 
-       // if (!imagen.isEmpty()) {
-         //   Path directorioImagenes = Paths.get("src\\main\\resources\\static\\imagenes");
-           // String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-           // try {
-             //   byte[] bytesImagen = imagen.getBytes();
-               // Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + imagen.getOriginalFilename());
-               // Files.write(rutaCompleta, bytesImagen);
-              //  user.setFotobaner(imagen.getOriginalFilename());
-           // } catch (IOException exc) {
-             //   System.out.println("Error Guardando la imagen: " + exc.getMessage());
-            //}
-        //}
-        interUsuario.savedUsuario(user);
-        return "El usuario fue creado";
-    }
-
-    //@DeleteMapping("/borrarUsuario/{id}")
-    //public String borrarUsuario(@PathVariable Long id) throws IOException {
-
-        //Path filePath = Paths.get("src\\main\\resources\\static\\imagenes").toAbsolutePath().normalize().resolve("Banner.jpg");
-       // Files.delete(filePath);
-
-        //interUsuario.deletedUsuario(id);
-       // return "borrado bien";
-      //  return "El usuario fue eliminado";
-    //}
-
+   
     @PutMapping(value="/editarBanner/{id}", consumes = MULTIPART_FORM_DATA_VALUE)
     public Usuario editUsuario(@PathVariable Long id,
             @RequestParam("file") MultipartFile imagen, @RequestParam("nombreNewImagen") String nombreImagen) throws IOException {
@@ -412,12 +381,6 @@ public class Controller {
         this.iSobreMi.updateSobreMi(sm);
         return sm;
     }
-    //@DeleteMapping("/borrarInfoSobreMi/{id}")
-   // public String borrarInfoSobreMi(@PathVariable Long id) {
-        //SobreMi sm = this.iSobreMi.findSobreMi(id);
-        
-     //   this.iSobreMi.deletedSobreMi(id);
-       // return "Info borrada";
-    //}
+    
 
 }
