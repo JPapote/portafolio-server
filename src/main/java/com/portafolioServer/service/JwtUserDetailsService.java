@@ -22,10 +22,12 @@ public class JwtUserDetailsService implements UserDetailsService {
     private IService interUsuario;
  
 	@Override
-	public UserDetails loadUserByUsername(String password) throws UsernameNotFoundException {
-         if(interUsuario.findByPassword(password)!= null){
+	public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
+         Usuario u = interUsuario.findByNombre(nombre);
+         
+            if(u != null){
  		
-			return new User(password, "$2a$10$lG/EuFY5E/BnxpkgMdjFDesfRZ653TyR5wL.4cAL06wZGlnMNVulW",
+			return new User(nombre, u.getPassword(),
 					new ArrayList<>());
 		
 	}else{
