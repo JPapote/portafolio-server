@@ -4,35 +4,56 @@
  */
 package com.portafolioServer.service;
 
+import com.portafolioServer.model.DAOUser;
+import com.portafolioServer.model.UserDTO;
 import com.portafolioServer.model.Usuario;
-import com.portafolioServer.repository.Repository;
+import com.portafolioServer.repository.UserRepository;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.portafolioServer.repository.MiRepository;
+import org.springframework.context.annotation.Lazy;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
     
-     @Autowired
-    private IService interUsuario;
- 
-	@Override
-	public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
-         Usuario u = interUsuario.findByNombre(nombre);
-         
-            if(u != null){
- 		
-			return new User(nombre, u.getPassword(),
-					new ArrayList<>());
-		
-	}else{
-             throw new UsernameNotFoundException("User not found with password: ");
+        @Autowired
+        @Lazy
+	private UserRepository userDao;
 
-         }
-       }
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		List<SimpleGrantedAuthority> roles=null;
+		
+		DAOUser user = userDao.findByUsername(username);
+		if (user != null) {
+			roles = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
+			return new User(user.getUsername(), user.getPassword(), roles);
+		}
+		throw new UsernameNotFoundException("User not found with the name " + username);
+	}
+	
+        
+	
+	public DAOUser save(UserDTO user) {
+		DAOUser newUser = new DAOUser();
+		newUser.setUsername(user.getUsername());
+		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+		newUser.setRole(user.getRole());
+		return userDao.save(newUser);
+	}
+
+
 }
