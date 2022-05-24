@@ -66,9 +66,9 @@ public class JwtAuthenticationController {
 		return ResponseEntity.ok(new AuthenticationResponse(token));
 	}
 	
-	//@RequestMapping(value = "/register", method = RequestMethod.POST)
-        //@CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
-	//public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-	//	return ResponseEntity.ok(userDetailsService.save(user));
-	//}
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+        @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
+	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+		return ResponseEntity.ok(userDetailsService.save(user));
+	}
 }
