@@ -6,10 +6,10 @@ package com.portafolioServer.service;
 
 import com.portafolioServer.model.Usuario;
 
-import com.portafolioServer.repository.Repository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.portafolioServer.repository.MiRepository;
 
 /**
  *
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class ServiceUsuario implements IService {
     
     @Autowired
-    private Repository repo;
+    private MiRepository repo;
 
     @Override
     public List<Usuario> getUsuario() {

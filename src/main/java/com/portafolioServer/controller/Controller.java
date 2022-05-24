@@ -62,7 +62,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author Antonio
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:3306")
+@CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
 public class Controller {
 
     @Autowired
@@ -84,6 +84,7 @@ public class Controller {
     private ISobreMi iSobreMi;
 
     @GetMapping("/traerUsuarios")
+    @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public List<Usuario> getUser() {
 
         return interUsuario.getUsuario();
@@ -93,7 +94,7 @@ public class Controller {
     @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public ResponseEntity<Resource> fileImagenes(@PathVariable("filename") String filename) throws IOException {
         //Path filePath = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes").toAbsolutePath().normalize().resolve(filename);
-       Path filePath = Paths.get("src/main/java/com/portafolioServer/imagenes").toAbsolutePath().normalize().resolve(filename);
+       Path filePath = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes").toAbsolutePath().normalize().resolve(filename);
         
         //System.out.println(filePath);
         if (!Files.exists(filePath)) {
@@ -108,8 +109,7 @@ public class Controller {
     }
 
     @GetMapping("/traerUser/{id}")
-    //@CrossOrigin(origins = "http://localhost:4200")
-    @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
+   @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public Usuario unUser(@PathVariable Long id) {
         Usuario per = interUsuario.findUsuario(id);
         //try{
@@ -133,11 +133,11 @@ public class Controller {
 
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
+            Path directorioImagenes = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(p.getFotobaner());
@@ -174,11 +174,11 @@ public class Controller {
 
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
+            Path directorioImagenes = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(ed.getFoto());
@@ -235,11 +235,11 @@ public class Controller {
         }
         if (!imagen.isEmpty()) {
 
-            Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
+            Path directorioImagenes = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             try {
                 byte[] bytesImagen = imagen.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(exp.getFoto());
@@ -289,6 +289,7 @@ public class Controller {
         return "Info borrada";
     }
 
+    @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     @PutMapping("/editarProyecto/{id}")
     public Proyecto editarProyecto(@PathVariable Long id,
             @RequestBody Proyecto proyecto) {
@@ -350,7 +351,7 @@ public class Controller {
         
          if (!image.isEmpty()) {
 
-             Path directorioImagenes = Paths.get("src/main/java/com/portafolioServer/imagenes");
+             Path directorioImagenes = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
             
             try {
@@ -358,7 +359,7 @@ public class Controller {
         
         
                byte[] bytesImagen = image.getBytes();
-                Path rutaCompleta = Paths.get(rutaAbsoluta + "/" + nombreImagen);
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "\\" + nombreImagen);
 
                 Files.write(rutaCompleta, bytesImagen);
                 Path filePath = directorioImagenes.toAbsolutePath().normalize().resolve(sm.getFotoperfil());

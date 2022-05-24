@@ -34,8 +34,6 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
     private String nombre;
-    @JsonIgnore
-    private String password;
     private String fotobaner;
   
     
