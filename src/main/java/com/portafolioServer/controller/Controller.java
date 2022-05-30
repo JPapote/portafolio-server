@@ -93,10 +93,10 @@ public class Controller {
     @GetMapping("fileImagenes/{filename}")
     @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public ResponseEntity<Resource> fileImagenes(@PathVariable("filename") String filename) throws IOException {
-        //Path filePath = Paths.get("src\\main\\java\\com\\portafolioServer\\imagenes").toAbsolutePath().normalize().resolve(filename);
+        
        Path filePath = Paths.get("src/main/java/com/portafolioServer/imagenes").toAbsolutePath().normalize().resolve(filename);
         
-        //System.out.println(filePath);
+        
         if (!Files.exists(filePath)) {
             throw new FileNotFoundException(filename + " was not found on the server");
         }
@@ -112,14 +112,7 @@ public class Controller {
    @CrossOrigin(origins = "https://mi-portafolio-fbb13.web.app")
     public Usuario unUser(@PathVariable Long id) {
         Usuario per = interUsuario.findUsuario(id);
-        //try{
-        //  Base64.Decoder dec = Base64.getDecoder();
-// Decode
-        //String ds = new String(dec.decode(per.getPassword()));
-        //per.setPassword(ds);
-        //}catch(Exception e){
-        //  System.out.println("TODAVIA NO ESPERA XD" + e.getMessage());
-        // }
+        
         return per;
     }
 
